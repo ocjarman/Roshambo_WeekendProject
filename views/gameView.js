@@ -3,6 +3,9 @@ const html = require("html-template-tag");
 // '/games/:id'
 function gameResult(game) {
   return html`
+    <head>
+      <link rel="stylesheet" href="/public/styles.css" />
+    </head>
     <body>
       <div>
         <h2>Game id: ${game.id}</h2>
@@ -22,6 +25,7 @@ function homepage() {
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="/public/styles.css">
         <title>ROSHAMBO</title>
       </head>
       <body>
@@ -49,6 +53,9 @@ function homepage() {
 
 function listAllPlayers(players) {
   return html`
+    <head>
+      <link rel="stylesheet" href="/public/styles.css" />
+    </head>
     <body>
       <h1>Roshambo Players</h1>
       <div>
@@ -72,6 +79,9 @@ function listAllPlayers(players) {
 // /players/:playerId
 function listOnePlayer(player, games) {
   return html`
+    <head>
+      <link rel="stylesheet" href="/public/styles.css" />
+    </head>
     <body>
       <div>
         <h2>Player id: ${player.id}</h2>
@@ -97,11 +107,15 @@ function listOnePlayer(player, games) {
   `;
 }
 
+// POST /games
 function playGame(player, playerChoice, computerChoice, game) {
   return html`
     <!DOCTYPE html>
     <html lang="en">
       <head>
+        <head>
+          <link rel="stylesheet" href="/public/styles.css" />
+        </head>
         <title>ROSHAMBO</title>
       </head>
       <body>
@@ -122,12 +136,14 @@ function playGame(player, playerChoice, computerChoice, game) {
   `;
 }
 
+//fxn to get random computer choice
 function computerChoice() {
   let rpcArray = ["rock", "paper", "scissors"];
   let randomNum = Math.floor(Math.random() * 3);
   return rpcArray[randomNum];
 }
 
+//fxn to determine winner
 function determineWinner(playerChoice, compChoice) {
   let lcplayerChoice = playerChoice.toLowerCase();
   let resultOfGame = "";
@@ -145,7 +161,6 @@ function determineWinner(playerChoice, compChoice) {
   return resultOfGame;
 }
 
-console.log(computerChoice);
 module.exports = {
   gameResult,
   homepage,

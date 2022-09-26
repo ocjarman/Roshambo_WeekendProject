@@ -5,18 +5,14 @@ const { Game, Player } = require("../db");
 
 const { listAllPlayers, listOnePlayer } = require("../views/gameView");
 
-// //--------------------------------------
-// // GET /player
-// // Returns a list of all players
+//------------------GET /players--------------------
 
 router.get("/", async (req, res, next) => {
   const players = await Player.findAll();
   res.send(listAllPlayers(players));
 });
 
-// //--------------------------------------
-// // Returns a specific player, along with their games played
-
+// //----------------GET /players/:id----------------------
 router.get("/:playerId", async (req, res, next) => {
   let playerId = req.params.playerId;
   const player = await Player.findByPk(playerId);
@@ -27,16 +23,12 @@ router.get("/:playerId", async (req, res, next) => {
   res.send(listOnePlayer(player, games));
 });
 
-// //--------------------------------------
-// // PUT /player/:playerId
-// // Body:
-// // username: string representing a username
-// // Updates a players name to be the given name
-// // HINT: use Postman to test this out
+//----------------PUT /player/:playerId----------------------
+//*****--Updates a players name to be the given name--***********
+
 router.put("/:playerId", async (req, res, next) => {
   const playerId = req.params.playerId;
   const player = await Player.findByPk(playerId);
-  // console.log(player);
 
   const changeUserName = await Player.update(
     { username: req.body.username },
@@ -46,7 +38,6 @@ router.put("/:playerId", async (req, res, next) => {
       },
     }
   );
-
   res.redirect("/players");
 });
 

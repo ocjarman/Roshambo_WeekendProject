@@ -3,6 +3,9 @@ const { Game, Player } = require("./db");
 const express = require("express");
 const app = express();
 
+//give access to css -- not working
+app.use(express.static("public"));
+
 // parses url-encoded bodies
 app.use(express.urlencoded({ extended: false }));
 
@@ -14,10 +17,9 @@ const playerRouter = require("./routes/players");
 const methodOverride = require("method-override");
 app.use(methodOverride("_method"));
 
+//allows access to routes
 app.use("/games", gameRouter);
 app.use("/players", playerRouter);
-
-// //--------------------------------------
 
 app.get("/", async (req, res) => {
   res.redirect("/games");
